@@ -1,6 +1,7 @@
 package com.example.sujinming.qumiao;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import com.example.sujinming.qumiao.myDefine.DepthPageTransformer;
 
@@ -18,6 +20,7 @@ public class MainActivity extends Activity {
 
     private ViewPager viewPager;
     private List<View> views = new ArrayList<View>();
+    private Button guide_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,15 @@ public class MainActivity extends Activity {
 
             @Override
             public Object instantiateItem(ViewGroup container, int position) {
+                if(position == views.size() - 1) {
+                    views.get(position).findViewById(R.id.guide_btn).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            System.out.print("123");
+                            startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+                        }
+                    });
+                }
                 container.addView(views.get(position));
                 return views.get(position);
             }
@@ -55,7 +67,5 @@ public class MainActivity extends Activity {
                 return view == object;
             }
         });
-
-
     }
 }

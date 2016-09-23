@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">QuMiao</string>
+    <string name="guide_txt">开始体验</string>
 </resources>
