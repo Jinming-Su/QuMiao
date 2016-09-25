@@ -13,6 +13,7 @@
         android:gravity="center">
         <ImageButton
             android:id="@+id/tab_1_img"
+            android:clickable="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/tab_weixin_pressed"
@@ -34,6 +35,7 @@
         android:gravity="center">
         <ImageButton
             android:id="@+id/tab_2_img"
+            android:clickable="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/tab_find_frd_normal"
@@ -55,6 +57,7 @@
         android:gravity="center">
         <ImageButton
             android:id="@+id/tab_3_img"
+            android:clickable="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/tab_address_normal"
@@ -76,6 +79,7 @@
         android:gravity="center">
         <ImageButton
             android:id="@+id/tab_4_img"
+            android:clickable="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/tab_settings_normal"

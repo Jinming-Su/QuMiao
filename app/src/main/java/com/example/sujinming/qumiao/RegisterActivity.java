@@ -33,6 +33,82 @@ public class RegisterActivity extends Activity {
         setContentView(R.layout.main);
 
         initView();
+
+        initEvents();
+    }
+
+    private void initEvents(){
+        tab1.setOnClickListener(onClickListener);
+        tab2.setOnClickListener(onClickListener);
+        tab3.setOnClickListener(onClickListener);
+        tab4.setOnClickListener(onClickListener);
+
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                resetImg();
+                int currentItem = viewPager.getCurrentItem();
+                switch (currentItem) {
+                    case 0:
+                        tab1Img.setImageResource(R.drawable.tab_weixin_pressed);
+                        break;
+                    case 1:
+                        tab2Img.setImageResource(R.drawable.tab_find_frd_pressed);
+                        break;
+                    case 2:
+                        tab3Img.setImageResource(R.drawable.tab_address_pressed);
+                        break;
+                    case 3:
+                        tab4Img.setImageResource(R.drawable.tab_settings_pressed);
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            resetImg();
+            switch (v.getId()) {
+                case R.id.tab_1:
+                    viewPager.setCurrentItem(0);
+                    tab1Img.setImageResource(R.drawable.tab_weixin_pressed);
+                    break;
+                case R.id.tab_2:
+                    viewPager.setCurrentItem(1);
+                    tab2Img.setImageResource(R.drawable.tab_find_frd_pressed);
+                    break;
+                case R.id.tab_3:
+                    viewPager.setCurrentItem(2);
+                    tab3Img.setImageResource(R.drawable.tab_address_pressed);
+                    break;
+                case R.id.tab_4:
+                    viewPager.setCurrentItem(3);
+                    tab4Img.setImageResource(R.drawable.tab_settings_pressed);
+                    break;
+            }
+        }
+    };
+
+    /**
+     * 将所有图片切换为暗色
+     */
+    private void resetImg(){
+        tab1Img.setImageResource(R.drawable.tab_weixin_normal);
+        tab2Img.setImageResource(R.drawable.tab_find_frd_normal);
+        tab3Img.setImageResource(R.drawable.tab_address_normal);
+        tab4Img.setImageResource(R.drawable.tab_settings_normal);
     }
 
     private void initView() {
@@ -82,3 +158,4 @@ public class RegisterActivity extends Activity {
         viewPager.setAdapter(pagerAdapter);
     }
 }
+
