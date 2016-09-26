@@ -1,16 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
     
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="tab3"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:gravity="center"
+        android:id="@+id/username_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="用户名"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="25dp"
+        android:textSize="20dp"
         />
-</LinearLayout>
+    <EditText
+        android:id="@+id/username_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/username_tv"
+        android:layout_toRightOf="@+id/username_tv"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        />
+
+    <TextView
+        android:id="@+id/password_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="密码"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/username_tv"
+        android:layout_marginTop="25dp"
+        android:textSize="20dp"
+        />
+    <EditText
+        android:id="@+id/password_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/username_tv"
+        android:layout_toRightOf="@+id/username_tv"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        />
+
+    <CheckBox
+        android:id="@+id/saveUsername_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/password_et"
+        android:text="保存用户名"
+        android:checked="false"/>
+
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/saveUsername_cb"
+        android:text="登陆"
+        />
+    <Button
+        android:id="@+id/cancel_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/login_btn"
+        android:layout_alignTop="@+id/login_btn"
+        android:text="取消"
+        />
+</RelativeLayout>

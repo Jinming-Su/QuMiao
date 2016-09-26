@@ -1,14 +1,22 @@
 package com.example.sujinming.qumiao;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import com.example.sujinming.qumiao.myDefine.MyConst;
+import com.example.sujinming.qumiao.myDefine.Auth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +34,14 @@ public class MainActivity extends Activity {
     private ImageButton tab4Img;
     private PagerAdapter pagerAdapter;
     private List<View> views = new ArrayList<View>();
+
+    //auth
+    private EditText username_et, password_et;
+    private CheckBox saveUsername_cb;
+    private SharedPreferences sp;
+    private SharedPreferences.Editor editor;
+    private Button login_btn;
+    private Button cancel_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,12 +147,55 @@ public class MainActivity extends Activity {
         views.add(tab02);
         views.add(tab03);
         views.add(tab04);
-
         pagerAdapter = new PagerAdapter() {
             @Override
             public Object instantiateItem(ViewGroup container, int position) {
                 View view = views.get(position);
                 container.addView(view);
+                switch (position) {
+                    case MyConst.TWO:
+                        username_et = (EditText)findViewById(R.id.username_et);
+                        password_et = (EditText)findViewById(R.id.password_et);
+                        login_btn = (Button)findViewById(R.id.login_btn);
+                        cancel_btn = (Button)findViewById(R.id.cancel_btn);
+                        saveUsername_cb = (CheckBox)findViewById(R.id.saveUsername_cb);
+                        sp = getSharedPreferences("auth", MODE_PRIVATE);
+                        editor = sp.edit();
+
+                        String username_tmp = sp.getString("username","");
+                        if( username_tmp == null) {
+                            saveUsername_cb.setChecked(false);
+                        } else {
+                            saveUsername_cb.setChecked(true);
+                            username_et.setText(username_tmp);
+                        }
+
+                        //auth
+                        login_btn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                switch (v.getId()) {
+                                    case R.id.login_btn:
+                                        String username = username_et.getText().toString().trim();
+                                        String password = password_et.getText().toString().trim();
+                                        if("admin".equals(username) && "123456".equals(password)) {
+                                            if(saveUsername_cb.isChecked()) {
+                                                editor.putString("username", username);
+                                                editor.commit();
+                                                Toast.makeText(MainActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                editor.remove("username");
+                                                editor.commit();
+                                            }
+                                        } else {
+                                            Toast.makeText(MainActivity.this, "禁止登陆", Toast.LENGTH_SHORT).show();
+                                        }
+                                        break;
+                                }
+                            }
+                        });
+                        break;
+                }
                 return view;
             }
 
