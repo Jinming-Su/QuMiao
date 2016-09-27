@@ -11,12 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.sujinming.qumiao.myDefine.MyConst;
-import com.example.sujinming.qumiao.myDefine.Auth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,14 +23,12 @@ import java.util.List;
 public class MainActivity extends Activity {
 
     private ViewPager viewPager;
-    private LinearLayout tab1;
-    private LinearLayout tab2;
-    private LinearLayout tab3;
-    private LinearLayout tab4;
-    private ImageButton tab1Img;
-    private ImageButton tab2Img;
-    private ImageButton tab3Img;
-    private ImageButton tab4Img;
+    private LinearLayout friend;
+    private LinearLayout weiMiao;
+    private LinearLayout profile;
+    private ImageView friend_img;
+    private ImageView weiMiao_img;
+    private ImageView profile_img;
     private PagerAdapter pagerAdapter;
     private List<View> views = new ArrayList<View>();
 
@@ -54,10 +51,9 @@ public class MainActivity extends Activity {
     }
 
     private void initEvents(){
-        tab1.setOnClickListener(onClickListener);
-        tab2.setOnClickListener(onClickListener);
-        tab3.setOnClickListener(onClickListener);
-        tab4.setOnClickListener(onClickListener);
+        friend.setOnClickListener(onClickListener);
+        weiMiao.setOnClickListener(onClickListener);
+        profile.setOnClickListener(onClickListener);
 
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -70,17 +66,14 @@ public class MainActivity extends Activity {
                 resetImg();
                 int currentItem = viewPager.getCurrentItem();
                 switch (currentItem) {
-                    case 0:
-                        tab1Img.setImageResource(R.drawable.tab_weixin_pressed);
+                    case MyConst.ZERO:
+                        friend_img.setImageResource(R.drawable.tab_message_pressed);
                         break;
-                    case 1:
-                        tab2Img.setImageResource(R.drawable.tab_find_frd_pressed);
+                    case MyConst.ONE:
+                        weiMiao_img.setImageResource(R.drawable.tab_miao_pressed);
                         break;
-                    case 2:
-                        tab3Img.setImageResource(R.drawable.tab_address_pressed);
-                        break;
-                    case 3:
-                        tab4Img.setImageResource(R.drawable.tab_settings_pressed);
+                    case MyConst.TWO:
+                        profile_img.setImageResource(R.drawable.tab_profile_pressed);
                         break;
                 }
             }
@@ -97,21 +90,17 @@ public class MainActivity extends Activity {
         public void onClick(View v) {
             resetImg();
             switch (v.getId()) {
-                case R.id.tab_1:
-                    viewPager.setCurrentItem(0);
-                    tab1Img.setImageResource(R.drawable.tab_weixin_pressed);
+                case R.id.friend:
+                    viewPager.setCurrentItem(MyConst.ZERO);
+                    friend_img.setImageResource(R.drawable.tab_message_pressed);
                     break;
-                case R.id.tab_2:
-                    viewPager.setCurrentItem(1);
-                    tab2Img.setImageResource(R.drawable.tab_find_frd_pressed);
+                case R.id.weiMiao:
+                    viewPager.setCurrentItem(MyConst.ONE);
+                    weiMiao_img.setImageResource(R.drawable.tab_miao_pressed);
                     break;
-                case R.id.tab_3:
-                    viewPager.setCurrentItem(2);
-                    tab3Img.setImageResource(R.drawable.tab_address_pressed);
-                    break;
-                case R.id.tab_4:
-                    viewPager.setCurrentItem(3);
-                    tab4Img.setImageResource(R.drawable.tab_settings_pressed);
+                case R.id.profile:
+                    viewPager.setCurrentItem(MyConst.TWO);
+                    friend_img.setImageResource(R.drawable.tab_profile_pressed);
                     break;
             }
         }
@@ -121,32 +110,29 @@ public class MainActivity extends Activity {
      * 将所有图片切换为暗色
      */
     private void resetImg(){
-        tab1Img.setImageResource(R.drawable.tab_weixin_normal);
-        tab2Img.setImageResource(R.drawable.tab_find_frd_normal);
-        tab3Img.setImageResource(R.drawable.tab_address_normal);
-        tab4Img.setImageResource(R.drawable.tab_settings_normal);
+        friend_img.setImageResource(R.drawable.tab_message_normal);
+        weiMiao_img.setImageResource(R.drawable.tab_miao_normal);
+        profile_img.setImageResource(R.drawable.tab_profile_normal);
     }
 
     private void initView() {
         viewPager = (ViewPager)findViewById(R.id.main_viewPager);
-        tab1 = (LinearLayout)findViewById(R.id.tab_1);
-        tab2 = (LinearLayout)findViewById(R.id.tab_2);
-        tab3 = (LinearLayout)findViewById(R.id.tab_3);
-        tab4 = (LinearLayout)findViewById(R.id.tab_4);
-        tab1Img = (ImageButton)findViewById(R.id.tab_1_img);
-        tab2Img = (ImageButton)findViewById(R.id.tab_2_img);
-        tab3Img = (ImageButton)findViewById(R.id.tab_3_img);
-        tab4Img = (ImageButton)findViewById(R.id.tab_4_img);
+        friend = (LinearLayout)findViewById(R.id.friend);
+        weiMiao = (LinearLayout)findViewById(R.id.weiMiao);
+        profile = (LinearLayout)findViewById(R.id.profile);
+        friend_img = (ImageView)findViewById(R.id.friend_img);
+        weiMiao_img = (ImageView)findViewById(R.id.weiMiao_img);
+        profile_img = (ImageView)findViewById(R.id.profile_img);
 
+        //添加layout
         LayoutInflater inflater = LayoutInflater.from(this);
-        View tab01 = inflater.inflate(R.layout.tab1, null);
-        View tab02 = inflater.inflate(R.layout.tab2, null);
-        View tab03 = inflater.inflate(R.layout.tab3, null);
-        View tab04 = inflater.inflate(R.layout.tab4, null);
-        views.add(tab01);
-        views.add(tab02);
-        views.add(tab03);
-        views.add(tab04);
+        View friend_lyt = inflater.inflate(R.layout.friend, null);
+        View weiMiao_lyt = inflater.inflate(R.layout.wei_miao, null);
+        View profile_lyt = inflater.inflate(R.layout.profile, null);
+        views.add(friend_lyt);
+        views.add(weiMiao_lyt);
+        views.add(profile_lyt);
+
         pagerAdapter = new PagerAdapter() {
             @Override
             public Object instantiateItem(ViewGroup container, int position) {
