@@ -1,6 +1,9 @@
 # QuMiao
 A app for social contact
 
+###pending
+---
+Next one month, maybe I don't have time to do this project.But I will complete it this year.
 
 ###程序名：趣喵
 ######通过有趣的事情认识他（她）
